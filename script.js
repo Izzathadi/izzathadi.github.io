@@ -5,6 +5,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particlesArray;
+const particleColor = "#38a6ff"; // Warna partikel biru
 
 // get mouse position
 let mouse = {
@@ -32,7 +33,7 @@ class Particle {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-    ctx.fillStyle = "#00aaff";
+    ctx.fillStyle = particleColor;
     ctx.fill();
   }
   // check particle position, check mouse position, move the particle, draw the particle
@@ -51,16 +52,16 @@ class Particle {
     let distance = Math.sqrt(dx * dx + dy * dy);
     if (distance < mouse.radius + this.size) {
       if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-        this.x += 10;
+        this.x += 5;
       }
       if (mouse.x > this.x && this.x > this.size * 10) {
-        this.x -= 10;
+        this.x -= 5;
       }
       if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-        this.y += 10;
+        this.y += 5;
       }
       if (mouse.y > this.y && this.y > this.size * 10) {
-        this.y -= 10;
+        this.y -= 5;
       }
     }
     // move particle
@@ -74,17 +75,16 @@ class Particle {
 // create particle array
 function init() {
   particlesArray = [];
-  let numberOfParticles = (canvas.height * canvas.width) / 9000;
+  let numberOfParticles = (canvas.height * canvas.width) / 12000;
   for (let i = 0; i < numberOfParticles; i++) {
     let size = Math.random() * 2 + 1;
     let x = Math.random() * (innerWidth - size * 2 - size * 2) + size * 2;
     let y = Math.random() * (innerHeight - size * 2 - size * 2) + size * 2;
     let directionX = Math.random() * 0.4 - 0.2;
     let directionY = Math.random() * 0.4 - 0.2;
-    let color = "#00aaff";
 
     particlesArray.push(
-      new Particle(x, y, directionX, directionY, size, color)
+      new Particle(x, y, directionX, directionY, size, particleColor)
     );
   }
 }
@@ -112,7 +112,7 @@ function connect() {
           (particlesArray[a].y - particlesArray[b].y);
       if (distance < (canvas.width / 7) * (canvas.height / 7)) {
         opacityValue = 1 - distance / 20000;
-        ctx.strokeStyle = "rgba(0, 170, 255," + opacityValue + ")";
+        ctx.strokeStyle = "rgba(56, 166, 255," + opacityValue + ")";
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);

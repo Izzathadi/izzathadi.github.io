@@ -4,79 +4,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Izzat Ikhwan Hadi - Backend Developer</title>
+    <title>Izzat Ikhwan Hadi - Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <canvas id="canvas-background"></canvas>
-    <div class="container">
-        <header>
-            <h1>Izzat Ikhwan Hadi [cite: 1]</h1>
-            <h2>Backend Developer [cite: 2]</h2>
+
+    <div class="main-container">
+        <header class="card hero">
+            <div class="hero-text">
+                <h1 class="hero-title">Izzat Ikhwan Hadi</h1>
+                <h2 class="hero-subtitle">Backend Developer</h2>
+                <p class="hero-summary">Mahasiswa Teknik Informatika yang antusias membangun sistem backend
+                    berskala, efisien, dan berdampak nyata, terutama untuk digitalisasi UMKM.</p>
+                <div class="contact-links">
+                    <a href="mailto:izzatikhwanhadi@gmail.com" class="hero-button">Email Me</a>
+                    <a href="https://linkedin.com/in/izzatikhwanhadi" target="_blank" rel="noopener noreferrer"
+                        class="hero-button">LinkedIn</a>
+                </div>
+            </div>
         </header>
 
-        <section id="summary">
-            <h3>Summary</h3>
-            <p>An Informatics Engineering student at Brawijaya University with hands-on experience in developing
-                full-stack web applications using Laravel, MySQL, and Docker[cite: 7]. Focused on backend development,
-                particularly in RESTful API design, authentication, and database architecture[cite: 8]. Enthusiastic
-                about building scalable, efficient, and impactful backend systems, especially to support the
-                digitalization of MSMEs[cite: 9].</p>
-        </section>
-
-        <section id="experience">
-            <h3>Experience</h3>
+        <section class="card experience">
+            <h3>Pengalaman</h3>
             <div class="job">
-                <h4>Full-Stack Web Developer [cite: 11]</h4>
-                <p class="company">MSME Digitalization - Shoe Boutique | 04/2024 - 06/2024 [cite: 12, 13]</p>
+                <h4>Full-Stack Web Developer</h4>
+                <p class="company">Digitalisasi UMKM Butik Sepatu | 04/2024 - 06/2024</p>
                 <ul>
-                    <li>Designed and built an e-commerce platform for a local shoe MSME using Laravel and the MVC
-                        architecture[cite: 14].</li>
-                    <li>Developed a responsive user interface and implemented form validation to enhance user
-                        experience[cite: 14].</li>
-                    <li>Created a relational database schema and connected entities (user, product, order, cart,
-                        review)[cite: 14].</li>
-                    <li>Conducted scenario testing and usability testing (SUS) to ensure application quality before
-                        deployment[cite: 14].</li>
+                    <li>Merancang dan membangun platform e-commerce menggunakan Laravel dan arsitektur MVC.
+                    </li>
+                    <li>Mendesain antarmuka pengguna yang responsif dan menerapkan validasi form.
+                    </li>
+                    <li>Membuat skema database relasional untuk user, produk, pesanan, dan entitas lainnya.
+                    </li>
+                    <li>Melakukan usability testing (SUS) untuk memastikan kualitas aplikasi.
+                    </li>
                 </ul>
             </div>
         </section>
 
-        <section id="education">
-            <h3>Education</h3>
-            <div class="edu-item">
-                <h4>Informatics Engineering [cite: 16]</h4>
-                <p>Brawijaya University - Bachelor's Degree (S1) | 08/2022 - Present [cite: 17, 22]</p>
-                <p>Faculty of Computer Science, GPA: 3.60 [cite: 18]</p>
+        <section class="card education">
+            <h3>Pendidikan</h3>
+            <h4>Teknik Informatika (S1)</h4>
+            <p><strong>Universitas Brawijaya</strong></p>
+            <p>08/2022 - Saat ini</p>
+            <p>IPK: 3.60</p>
+        </section>
+
+        <section class="card skills">
+            <h3>Keterampilan</h3>
+            <div class="skill-category">
+                <strong>Languages:</strong>
+                <span>PHP</span><span>Python</span><span>JavaScript</span><span>Java</span>
+            </div>
+            <div class="skill-category">
+                <strong>Frameworks:</strong>
+                <span>Laravel</span><span>Express.js</span><span>jQuery</span><span>Flask</span>
+            </div>
+            <div class="skill-category">
+                <strong>Tech-Stack:</strong>
+                <span>MySQL</span><span>AWS</span><span>REST
+                    API</span><span>PostgreSQL</span><span>Docker</span><span>Postman</span>
             </div>
         </section>
 
-        <section id="certifications">
-            <h3>Certifications</h3>
+        <section class="card certifications">
+            <h3>Sertifikasi</h3>
             <ul>
-                <li>The Complete Full-Stack Development Bootcamp - Udemy [cite: 20]</li>
-                <li>AWS Academy Graduate - AWS Academy Data Engineering - Amazon Web Services [cite: 21]</li>
+                <li>The Complete Full-Stack Development Bootcamp - Udemy</li>
+                <li>AWS Academy Graduate - Data Engineering - Amazon Web Services</li>
             </ul>
         </section>
-
-        <section id="skills">
-            <h3>Skills</h3>
-            <p><strong>Languages:</strong> PHP, Python, JavaScript, Java [cite: 24]</p>
-            <p><strong>Frameworks:</strong> Laravel, Express.js, jQuery, Flask [cite: 25]</p>
-            <p><strong>Cloud/Databases/Tech-Stack:</strong> MySQL, AWS Services, REST API, PostgreSQL, Postman, Docker,
-                Prometheus, Grafana, Linux [cite: 26]</p>
-        </section>
-
-        <section id="contact">
-            <h3>Contact</h3>
-            <p>Email: <a href="mailto:izzatikhwanhadi@gmail.com">izzatikhwanhadi@gmail.com [cite: 4]</a></p>
-            <p>Phone: 085314614994 [cite: 3]</p>
-            <p>Location: Malang, Indonesia [cite: 5]</p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/izzatikhwanhadi" target="_blank"
-                    rel="noopener noreferrer">linkedin.com/in/izzatikhwanhadi</a></p>
-        </section>
     </div>
+
     <script src="script.js"></script>
 </body>
 

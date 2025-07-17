@@ -1,12 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg-color: #0d1117;
+    --card-color: #161b22;
+    --border-color: #30363d;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8b949e;
+    --blue-accent: #38a6ff;
+    --blue-hover: #58a6ff;
+}
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #0a0a0a;
-    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
     margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+    padding: 2rem;
 }
 
 #canvas-background {
@@ -18,100 +27,155 @@ body {
     z-index: -1;
 }
 
-.container {
-    max-width: 900px;
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
-    position: relative;
+}
+
+.card {
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
     z-index: 1;
 }
 
-header {
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--blue-accent);
+}
+
+/* Specific Card Layouts */
+.hero {
+    grid-column: 1 / -1;
+    /* Make hero card span full width */
     text-align: center;
-    margin-bottom: 50px;
 }
 
-header h1 {
-    font-size: 3em;
-    font-weight: 700;
-    color: #00aaff;
-    margin: 0;
+.experience {
+    grid-column: span 2;
+    /* Make experience card wider */
 }
 
-header h2 {
-    font-size: 1.5em;
-    font-weight: 300;
-    color: #ffffff;
-    margin: 0;
+@media (max-width: 768px) {
+    .experience {
+        grid-column: span 1;
+    }
 }
 
+
+/* Typography */
 h3 {
-    color: #00aaff;
-    border-bottom: 2px solid #00aaff;
-    padding-bottom: 10px;
-    margin-top: 40px;
-    font-size: 1.8em;
+    color: var(--blue-accent);
+    font-size: 1.5rem;
+    margin-top: 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 h4 {
-    color: #ffffff;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
-
-p, ul {
-    line-height: 1.8;
-    color: #cccccc;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
 }
 
 ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
 }
 
 ul li {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="5" cy="5" r="3" fill="%2300aaff"/></svg>') no-repeat left center;
-    padding-left: 20px;
-    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
 }
 
-section {
-    background-color: rgba(10, 10, 10, 0.8);
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-    border: 1px solid #222;
+ul li::before {
+    content: '»';
+    position: absolute;
+    left: 0;
+    top: -2px;
+    color: var(--blue-accent);
+    font-size: 1.5em;
 }
 
+/* Hero Section */
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.hero-subtitle {
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--blue-accent);
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+.hero-summary {
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.contact-links .hero-button {
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--blue-accent);
+    padding: 12px 24px;
+    border-radius: 6px;
+    margin: 0 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.contact-links .hero-button:hover {
+    background-color: var(--blue-hover);
+}
+
+
+/* Experience Section */
 .job .company {
     font-style: italic;
-    color: #999;
-    margin-bottom: 10px;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
 }
 
-a {
-    color: #00aaff;
-    text-decoration: none;
+/* Skills Section */
+.skills .skill-category {
+    margin-bottom: 1rem;
 }
 
-a:hover {
-    text-decoration: underline;
+.skills strong {
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
 }
 
-#contact p {
-    margin: 5px 0;
+.skills span {
+    display: inline-block;
+    background-color: var(--border-color);
+    color: var(--text-primary);
+    padding: 5px 12px;
+    border-radius: 15px;
+    margin: 0.25rem;
+    font-size: 0.9rem;
 }
 
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2.5em;
-    }
+/* Education Section */
+.education p {
+    margin: 0.25rem 0;
+    color: var(--text-secondary);
+}
 
-    header h2 {
-        font-size: 1.2em;
-    }
-
-    .container {
-        padding: 20px 10px;
-    }
+.education strong {
+    color: var(--text-primary);
 }
