@@ -1,13 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
 :root {
-    --bg-color: #0d1117;
-    --card-color: #161b22;
-    --border-color: #30363d;
-    --text-primary: #e6f1ff;
-    --text-secondary: #8b949e;
-    --blue-accent: #38a6ff;
-    --blue-hover: #58a6ff;
+    /* Palet Warna Tema Terang (Default) */
+    --bg-color: #f8f9fa;
+    --card-bg-color: #ffffff;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --accent-color: #007bff;
+    --accent-hover: #0056b3;
+    --skill-bg: #e7f3ff;
+    --skill-border: #cce5ff;
+    --skill-text: #004085;
+}
+
+body.dark-theme {
+    /* Palet Warna Tema Gelap */
+    --bg-color: #0a041c;
+    --card-bg-color: rgba(26, 32, 53, 0.7);
+    --border-color: rgba(126, 110, 175, 0.4);
+    --shadow-color: rgba(240, 117, 255, 0.15);
+    --text-primary: #e6e0ff;
+    --text-secondary: #a093c4;
+    --accent-color: #f075ff;
+    --accent-hover: #d255ff;
+    --skill-bg: rgba(144, 117, 255, 0.15);
+    --skill-border: rgba(144, 117, 255, 0.3);
+    --skill-text: #e6e0ff;
 }
 
 body {
@@ -16,6 +37,8 @@ body {
     color: var(--text-primary);
     margin: 0;
     padding: 2rem;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 #canvas-background {
@@ -25,6 +48,15 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+    transition: opacity 0.4s ease;
+}
+
+body.dark-theme #canvas-background {
+    opacity: 1;
+}
+
+body:not(.dark-theme) #canvas-background {
+    opacity: 0.5;
 }
 
 .main-container {
@@ -36,29 +68,29 @@ body {
 }
 
 .card {
-    background-color: var(--card-color);
+    background-color: var(--card-bg-color);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 2rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
     z-index: 1;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    border-color: var(--blue-accent);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+    border-color: var(--accent-color);
 }
 
-/* Specific Card Layouts */
 .hero {
     grid-column: 1 / -1;
-    /* Make hero card span full width */
     text-align: center;
 }
 
 .experience {
     grid-column: span 2;
-    /* Make experience card wider */
 }
 
 @media (max-width: 768px) {
@@ -67,15 +99,15 @@ body {
     }
 }
 
-
-/* Typography */
 h3 {
-    color: var(--blue-accent);
+    color: var(--text-primary);
     font-size: 1.5rem;
+    font-weight: 600;
     margin-top: 0;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--accent-color);
     padding-bottom: 0.75rem;
     margin-bottom: 1.5rem;
+    transition: border-color 0.4s ease, color 0.4s ease;
 }
 
 h4 {
@@ -94,30 +126,36 @@ ul li {
     padding-left: 25px;
     margin-bottom: 12px;
     color: var(--text-secondary);
+    font-size: 0.95rem;
 }
 
 ul li::before {
-    content: '»';
+    content: '✔';
     position: absolute;
     left: 0;
-    top: -2px;
-    color: var(--blue-accent);
-    font-size: 1.5em;
+    top: 0;
+    color: var(--accent-color);
+    font-size: 1.2em;
+    transition: color 0.4s ease;
 }
 
-/* Hero Section */
+body.dark-theme ul li::before {
+    content: '✦';
+}
+
 .hero-title {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-primary);
     margin: 0;
 }
 
 .hero-subtitle {
     font-size: 1.75rem;
     font-weight: 300;
-    color: var(--blue-accent);
+    color: var(--accent-color);
     margin: 0.5rem 0 1.5rem 0;
+    transition: color 0.4s ease;
 }
 
 .hero-summary {
@@ -129,29 +167,28 @@ ul li::before {
 
 .contact-links .hero-button {
     text-decoration: none;
-    color: #fff;
-    background-color: var(--blue-accent);
+    color: var(--card-bg-color);
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-color);
     padding: 12px 24px;
     border-radius: 6px;
     margin: 0 0.5rem;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
 
 .contact-links .hero-button:hover {
-    background-color: var(--blue-hover);
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    transform: translateY(-2px);
 }
 
-
-/* Experience Section */
-.job .company {
-    font-style: italic;
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
+body.dark-theme .contact-links .hero-button {
+    color: #000;
 }
 
-/* Skills Section */
-.skills .skill-category {
-    margin-bottom: 1rem;
+body.dark-theme .contact-links .hero-button:hover {
+    color: #fff;
 }
 
 .skills strong {
@@ -162,20 +199,67 @@ ul li::before {
 
 .skills span {
     display: inline-block;
-    background-color: var(--border-color);
-    color: var(--text-primary);
+    background-color: var(--skill-bg);
+    border: 1px solid var(--skill-border);
+    color: var(--skill-text);
     padding: 5px 12px;
     border-radius: 15px;
     margin: 0.25rem;
     font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.4s ease;
 }
 
-/* Education Section */
-.education p {
-    margin: 0.25rem 0;
-    color: var(--text-secondary);
+/* Theme Toggle Button */
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    z-index: 1000;
+    overflow: hidden;
 }
 
-.education strong {
-    color: var(--text-primary);
+#theme-toggle .fa-sun, #theme-toggle .fa-moon {
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    position: absolute;
+}
+
+#theme-toggle .fa-sun {
+    color: #f39c12;
+}
+
+#theme-toggle .fa-moon {
+    color: #f075ff;
+}
+
+/* Icon visibility logic */
+body.dark-theme #theme-toggle .fa-sun {
+    transform: translateY(100%);
+    opacity: 0;
+}
+
+body:not(.dark-theme) #theme-toggle .fa-sun {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+body.dark-theme #theme-toggle .fa-moon {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+body:not(.dark-theme) #theme-toggle .fa-moon {
+    transform: translateY(-100%);
+    opacity: 0;
 }

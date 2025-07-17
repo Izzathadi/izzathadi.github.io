@@ -1,44 +1,77 @@
 const canvas = document.getElementById("canvas-background");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particlesArray;
-const particleColor = "#38a6ff"; // Warna partikel biru
+// --- Theme Toggler ---
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
 
-// get mouse position
+// Function to apply theme and save preference
+function applyTheme(theme) {
+  if (theme === "dark") {
+    body.classList.add("dark-theme");
+  } else {
+    body.classList.remove("dark-theme");
+  }
+  localStorage.setItem("theme", theme);
+  updateCanvasColors(theme);
+}
+
+// Event listener for the toggle button
+themeToggle.addEventListener("click", () => {
+  const currentTheme = localStorage.getItem("theme") || "light";
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+  applyTheme(newTheme);
+});
+
+// Check for saved theme on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  applyTheme(savedTheme);
+});
+
+// --- Canvas Animation ---
+let particlesArray;
+let particleColor = "#007bff"; // Default to light theme color
+let lineColor = "rgba(0, 123, 255,"; // Default to light theme color
+
+function updateCanvasColors(theme) {
+  if (theme === "dark") {
+    particleColor = "#f075ff";
+    lineColor = "rgba(240, 117, 255,";
+  } else {
+    particleColor = "#007bff";
+    lineColor = "rgba(0, 123, 255,";
+  }
+}
+
 let mouse = {
   x: null,
   y: null,
   radius: (canvas.height / 110) * (canvas.width / 110),
 };
 
-window.addEventListener("mousemove", function (event) {
+window.addEventListener("mousemove", (event) => {
   mouse.x = event.x;
   mouse.y = event.y;
 });
 
-// create particle
 class Particle {
-  constructor(x, y, directionX, directionY, size, color) {
+  constructor(x, y, directionX, directionY, size) {
     this.x = x;
     this.y = y;
     this.directionX = directionX;
     this.directionY = directionY;
     this.size = size;
-    this.color = color;
   }
-  // method to draw individual particle
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
     ctx.fillStyle = particleColor;
     ctx.fill();
   }
-  // check particle position, check mouse position, move the particle, draw the particle
   update() {
-    //check if particle is still within canvas
     if (this.x > canvas.width || this.x < 0) {
       this.directionX = -this.directionX;
     }
@@ -46,7 +79,6 @@ class Particle {
       this.directionY = -this.directionY;
     }
 
-    //check collision detection - mouse position / particle position
     let dx = mouse.x - this.x;
     let dy = mouse.y - this.y;
     let distance = Math.sqrt(dx * dx + dy * dy);
@@ -64,15 +96,12 @@ class Particle {
         this.y -= 5;
       }
     }
-    // move particle
     this.x += this.directionX;
     this.y += this.directionY;
-    // draw particle
     this.draw();
   }
 }
 
-// create particle array
 function init() {
   particlesArray = [];
   let numberOfParticles = (canvas.height * canvas.width) / 12000;
@@ -82,14 +111,10 @@ function init() {
     let y = Math.random() * (innerHeight - size * 2 - size * 2) + size * 2;
     let directionX = Math.random() * 0.4 - 0.2;
     let directionY = Math.random() * 0.4 - 0.2;
-
-    particlesArray.push(
-      new Particle(x, y, directionX, directionY, size, particleColor)
-    );
+    particlesArray.push(new Particle(x, y, directionX, directionY, size));
   }
 }
 
-// animation loop
 function animate() {
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -100,19 +125,16 @@ function animate() {
   connect();
 }
 
-// check if particles are close enough to draw a line between them
 function connect() {
   let opacityValue = 1;
   for (let a = 0; a < particlesArray.length; a++) {
     for (let b = a; b < particlesArray.length; b++) {
       let distance =
-        (particlesArray[a].x - particlesArray[b].x) *
-          (particlesArray[a].x - particlesArray[b].x) +
-        (particlesArray[a].y - particlesArray[b].y) *
-          (particlesArray[a].y - particlesArray[b].y);
+        (particlesArray[a].x - particlesArray[b].x) ** 2 +
+        (particlesArray[a].y - particlesArray[b].y) ** 2;
       if (distance < (canvas.width / 7) * (canvas.height / 7)) {
         opacityValue = 1 - distance / 20000;
-        ctx.strokeStyle = "rgba(56, 166, 255," + opacityValue + ")";
+        ctx.strokeStyle = lineColor + opacityValue + ")";
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -123,14 +145,13 @@ function connect() {
   }
 }
 
-window.addEventListener("resize", function () {
+window.addEventListener("resize", () => {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
-  mouse.radius = (canvas.height / 110) * (canvas.height / 110);
+  mouse.radius = (canvas.height / 110) * (canvas.width / 110);
   init();
 });
-
-window.addEventListener("mouseout", function () {
+window.addEventListener("mouseout", () => {
   mouse.x = undefined;
   mouse.y = undefined;
 });
